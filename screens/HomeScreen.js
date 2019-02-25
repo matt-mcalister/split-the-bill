@@ -33,9 +33,17 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         {/* show pick image icon*/}
-        <TouchableOpacity onPress={this.handleGetPhotos}>
+        <TouchableOpacity onPress={this.handleGetPhotos} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Icon.Ionicons
             name="md-images"
+            size={100}
+            color="grey"
+          />
+        </TouchableOpacity>
+        <Text>OR</Text>
+        <TouchableOpacity onPress={console.log} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Icon.Ionicons
+            name="md-camera"
             size={100}
             color="grey"
           />
@@ -82,7 +90,6 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center'
