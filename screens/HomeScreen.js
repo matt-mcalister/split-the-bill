@@ -9,23 +9,62 @@ import {
   CameraRoll
 } from 'react-native';
 import { WebBrowswer, Icon } from 'expo';
+const ImagePicker = require("react-native-image-picker")
 
 import { MonoText } from '../components/StyledText';
+import PhotoSelectIcon from "../components/PhotoSelectIcon"
+import PhotoList from "../components/PhotoList"
+
 
 export default class HomeScreen extends React.Component {
   state = {
-    receiptImage: null
+    receiptImage: null,
+    photos: []
   }
 
   static navigationOptions = {
     header: null,
   };
 
-  handleGetPhotos(){
-    CameraRoll.getPhotos({
-       first: 20,
-       assetType: 'Photos',
-     }).then(console.log)
+  handleGetPhotos = () => {
+    const options = {
+      title: 'Select Receipt',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    console.log(ImagePicker.showImagePicker);
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        const source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          receiptImage: source,
+        });
+      }
+    });
+
+
+
+
+    // CameraRoll.getPhotos({
+    //    first: 20,
+    //    assetType: 'Photos',
+    //  }).then(data => {
+    //    this.setState({
+    //      photos: data.edges
+    //    })
+    //  })
   }
 
   render() {
@@ -33,22 +72,13 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         {/* show pick image icon*/}
-        <TouchableOpacity onPress={this.handleGetPhotos} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Icon.Ionicons
-            name="md-images"
-            size={100}
-            color="grey"
-          />
+        <TouchableOpacity onPress={this.handleGetPhotos.bind(this)} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <PhotoSelectIcon name="md-images"/>
         </TouchableOpacity>
         <Text>OR</Text>
         <TouchableOpacity onPress={console.log} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Icon.Ionicons
-            name="md-camera"
-            size={100}
-            color="grey"
-          />
+          <PhotoSelectIcon name="md-camera"/>
         </TouchableOpacity>
-
       </View>
     );
   }
