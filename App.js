@@ -13,9 +13,20 @@ export default class App extends React.Component {
   };
 
   render() {
+    console.log("yooooooo");
+    console.log("state", this.state);
+    console.log("props", this.props);
     return (
       <Provider store={store} >
-        {!this.state.isLoadingComplete && !this.props.skipLoadingScreen ? <AppLoading /> : <AppNavigator />}
+        {!this.state.isLoadingComplete && !this.props.skipLoadingScreen ?
+          <AppLoading
+          startAsync={this._loadResourcesAsync}
+          onFinish={this._handleFinishLoading}
+          onError={this._handleLoadingError}
+          />
+          :
+          <AppNavigator />
+        }
       </Provider>
     )
   }
@@ -46,10 +57,3 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
