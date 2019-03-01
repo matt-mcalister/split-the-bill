@@ -3,22 +3,23 @@ import { Text } from 'react-native';
 import { connect } from "react-redux"
 
 import PhotoUpload from "../containers/PhotoUpload"
+import AddPeople from "../containers/AddPeople"
 
 
 class HomeScreen extends React.Component {
 
 
   render() {
-    console.log(this.props);
-    if (!this.props.selectedPhoto) {
+    // console.log(this.props);
+    // if (!this.props.selectedPhoto) {
+    //   return (
+    //     <PhotoUpload />
+    //   );
+    // } else {
       return (
-        <PhotoUpload />
-      );
-    } else {
-      return (
-        <Text>yo</Text>
+        <AddPeople />
       )
-    }
+    // }
   }
 }
 
