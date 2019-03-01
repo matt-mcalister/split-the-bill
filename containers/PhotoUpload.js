@@ -65,6 +65,10 @@ class PhotoUpload extends React.Component {
     })
   }
 
+  confirmPhoto = () => {
+    this.props.selectPhoto(this.state.uploadChoice)
+  }
+
 	render(){
     if (this.state.uploadChoice) {
       console.log(this.state.uploadChoice);
@@ -83,7 +87,7 @@ class PhotoUpload extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.confirmButtons]}
-              onPress={console.log}>
+              onPress={this.confirmPhoto}>
               <Text style={[styles.buttonText]}>Confirm</Text>
             </TouchableOpacity>
           </View>
