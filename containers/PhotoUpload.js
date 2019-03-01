@@ -3,7 +3,8 @@ import { connect } from "react-redux"
 import {
   Text,
   TouchableOpacity,
-  View
+  View,
+  Image
 } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
 import PhotoSelectIcon from "../components/PhotoSelectIcon"
@@ -28,27 +29,51 @@ class PhotoUpload extends React.Component {
     Permissions.askAsync(Permissions.CAMERA_ROLL).then( ({permissions}) => {
       if (permissions.cameraRoll && permissions.cameraRoll.status === "granted"){
         ImagePicker.launchImageLibraryAsync(options)
-          .then(this.props.selectPhoto)
-      } 
+          .then(data => {
+            this.setState({
+              uploadChoice: data
+            })
+          })
+      }
     })
+  }
 
-
+  handleTakePhoto = () => {
+    const options = {
+      allowsEditing: false,
+      quality: 1,
+      base64: true,
+      exif: true,
+    }
+    Permissions.askAsync(Permissions.CAMERA).then( ({permissions}) => {
+      if (permissions.camera && permissions.camera.status === "granted"){
+        ImagePicker.launchCameraAsync(options)
+          .then(data => {
+            this.setState({
+              uploadChoice: data
+            })
+          })
+      }
+    })
   }
 
 	render(){
-    console.log(this.props);
-		return (
-      <View style={[styles.column, styles.centered]}>
-        <TouchableOpacity onPress={this.handleGetPhotos}>
-          <PhotoSelectIcon name="md-images" />
-        </TouchableOpacity>
-        <Text>OR</Text>
-        <TouchableOpacity onPress={console.log}>
-          <PhotoSelectIcon name="md-camera"/>
-        </TouchableOpacity>
-      </View>
-    )
-	}
+    if (this.state.uploadChoice) {
+      return (<Image source={{uri: this.state.uploadChoice.uri}} style={[styles.fullScreen]}/>)
+    } else {
+      return (
+        <View style={[styles.column, styles.centered]}>
+          <TouchableOpacity onPress={this.handleGetPhotos}>
+            <PhotoSelectIcon name="md-images" />
+          </TouchableOpacity>
+          <Text>OR</Text>
+          <TouchableOpacity onPress={this.handleTakePhoto}>
+            <PhotoSelectIcon name="md-camera"/>
+          </TouchableOpacity>
+        </View>
+      )
+    }
+  }
 }
 
 const mapStateToProps = state => {

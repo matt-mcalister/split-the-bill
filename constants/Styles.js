@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import { Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
   centered: {
@@ -11,6 +12,10 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row"
   },
+  fullScreen: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  }
 });
 
 export default styles
