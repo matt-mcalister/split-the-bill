@@ -4,7 +4,9 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Image
+  Image,
+  Button,
+  Dimensions
 } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
 import PhotoSelectIcon from "../components/PhotoSelectIcon"
@@ -57,9 +59,36 @@ class PhotoUpload extends React.Component {
     })
   }
 
+  resetState = () => {
+    this.setState({
+      uploadChoice: null
+    })
+  }
+
 	render(){
     if (this.state.uploadChoice) {
-      return (<Image source={{uri: this.state.uploadChoice.uri}} style={[styles.fullScreen]}/>)
+      console.log(this.state.uploadChoice);
+      return (
+        <View style={[styles.column, styles.stretch]}>
+          <Image
+            source={this.state.uploadChoice}
+            style={{...styles.imageConfirm}}
+            resizeMode="contain"
+          />
+          <View style={[styles.row, styles.confirmButtonsContainer]}>
+            <TouchableOpacity
+              style={[styles.confirmButtons, styles.cancelButton]}
+              onPress={this.resetState}>
+              <Text style={[styles.buttonText]}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.confirmButtons]}
+              onPress={console.log}>
+              <Text style={[styles.buttonText]}>Confirm</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
     } else {
       return (
         <View style={[styles.column, styles.centered]}>
