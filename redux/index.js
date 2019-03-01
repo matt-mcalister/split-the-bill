@@ -6,7 +6,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const enhancer = composeWithDevTools({})(applyMiddleware(thunk));
 
 // const store = createStore(rootReducer, applyMiddleware(thunk))
-// const store = createStore(rootReducer, {}, enhancer)
 
 export default initStore => {
   return createStore(rootReducer, {}, enhancer)
