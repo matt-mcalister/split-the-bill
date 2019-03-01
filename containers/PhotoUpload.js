@@ -8,6 +8,7 @@ import {
 import { ImagePicker, Permissions } from 'expo';
 import PhotoSelectIcon from "../components/PhotoSelectIcon"
 import styles from "../constants/Styles"
+import { selectPhoto } from "../redux/actions/selectPhoto"
 
 
 
@@ -24,28 +25,21 @@ class PhotoUpload extends React.Component {
       base64: true,
       exif: true,
     }
-    console.log("some shit");
     Permissions.askAsync(Permissions.CAMERA_ROLL).then( ({permissions}) => {
       if (permissions.cameraRoll && permissions.cameraRoll.status === "granted"){
-        ImagePicker.launchImageLibraryAsync(options).then(data => {
-          this.setState({
-            receiptImage: data.uri
-          })
-        })
-      } else {
-        debugger
-      }
+        ImagePicker.launchImageLibraryAsync(options)
+          .then(this.props.selectPhoto)
+      } 
     })
 
 
   }
 
 	render(){
-    console.log("yo");
     console.log(this.props);
 		return (
       <View style={[styles.column, styles.centered]}>
-        <TouchableOpacity onPress={console.log}>
+        <TouchableOpacity onPress={this.handleGetPhotos}>
           <PhotoSelectIcon name="md-images" />
         </TouchableOpacity>
         <Text>OR</Text>
@@ -57,4 +51,16 @@ class PhotoUpload extends React.Component {
 	}
 }
 
-export default connect(state => state)(PhotoUpload)
+const mapStateToProps = state => {
+  return {
+    selectedPhoto: state.selectPhoto.photo
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    selectPhoto: (photoObj) => dispatch(selectPhoto(photoObj))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhotoUpload)
