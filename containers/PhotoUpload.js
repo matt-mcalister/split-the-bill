@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
 import PhotoSelectIcon from "../components/PhotoSelectIcon"
+import ConfirmButtons from "../components/ConfirmButtons"
 import styles from "../constants/Styles"
 import { selectPhoto } from "../redux/actions/selectPhoto"
 
@@ -79,18 +80,7 @@ class PhotoUpload extends React.Component {
             style={{...styles.imageConfirm}}
             resizeMode="contain"
           />
-          <View style={[styles.row, styles.confirmButtonsContainer]}>
-            <TouchableOpacity
-              style={[styles.confirmButtons, styles.cancelButton]}
-              onPress={this.resetState}>
-              <Text style={[styles.buttonText]}>Cancel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.confirmButtons]}
-              onPress={this.confirmPhoto}>
-              <Text style={[styles.buttonText]}>Confirm</Text>
-            </TouchableOpacity>
-          </View>
+          <ConfirmButtons onConfirm={this.confirmPhoto} onCancel={this.resetState}/>
         </View>
       )
     } else {

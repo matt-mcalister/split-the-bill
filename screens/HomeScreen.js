@@ -5,7 +5,6 @@ import { connect } from "react-redux"
 import PhotoUpload from "../containers/PhotoUpload"
 import AddPeople from "../containers/AddPeople"
 
-
 class HomeScreen extends React.Component {
 
 

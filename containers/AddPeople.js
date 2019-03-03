@@ -4,6 +4,9 @@ import {
   Text,
   TextInput
 } from "react-native"
+import ConfirmButtons from "../components/ConfirmButtons"
+import PersonInput from "../components/PersonInput"
+import styles from "../constants/Styles"
 
 class AddPeople extends React.Component {
 	state = {
@@ -46,23 +49,23 @@ class AddPeople extends React.Component {
   renderPeopleInputs(){
     const peopleIds = Object.keys(this.state.people)
     return (
-      <View>
+      <View style={{flex: 8}}>
         { peopleIds.map(id => {
           return (
-            <TextInput
+            <PersonInput
               key={id}
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={(name) => this.handleEditPerson(name, id)}
-              value={this.state.people[id].name}
+              onChange={this.handleEditPerson}
+              onRemove={console.log}
+              person={this.state.people[id]}
+              isNewPerson={false}
             />
           )
         }) }
-          <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          placeholder="Tap to add another person"
-          onChangeText={(newPersonName) => this.setState({newPersonName})}
-          onSubmitEditing={this.handleAddPerson}
-          value={this.state.newPersonName}
+        <PersonInput
+          onChange={(newPersonName) => this.setState({newPersonName})}
+          onSubmit={this.handleAddPerson}
+          person={{name: this.state.newPersonName}}
+          isNewPerson={true}
         />
       </View>
     )
@@ -71,9 +74,10 @@ class AddPeople extends React.Component {
 	render(){
     console.log(this.state);
 		return (
-      <View>
-        <Text>Who should pay?</Text>
+      <View style={[styles.column]}>
+        <Text style={{ textAlign: "center", fontSize: 30}}>Who should pay?</Text>
         {this.renderPeopleInputs()}
+        <ConfirmButtons onConfirm={console.log} onCancel={console.log}/>
       </View>
     )
 	}
