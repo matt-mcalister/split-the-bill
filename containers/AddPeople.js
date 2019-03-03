@@ -33,7 +33,8 @@ class AddPeople extends React.Component {
 
   handleAddPerson = (e) => {
     const name = this.state.newPersonName
-    const id = Object.keys(this.state.people).length + 1
+    const peopleIds = Object.keys(this.state.people)
+    const id = peopleIds[0] ? parseInt(peopleIds[peopleIds.length - 1], 10) + 1 : 1
     this.setState({
       people: {
         ...this.state.people,
@@ -46,6 +47,12 @@ class AddPeople extends React.Component {
     })
   }
 
+  handleRemovePerson = (id) => {
+    const people = {...this.state.people}
+    delete people[id]
+    this.setState({people})
+  }
+
   renderPeopleInputs(){
     const peopleIds = Object.keys(this.state.people)
     return (
@@ -55,7 +62,7 @@ class AddPeople extends React.Component {
             <PersonInput
               key={id}
               onChange={this.handleEditPerson}
-              onRemove={console.log}
+              onRemove={() => this.handleRemovePerson(id)}
               person={this.state.people[id]}
               isNewPerson={false}
             />
