@@ -4,6 +4,8 @@ import {
   Text,
   TextInput
 } from "react-native"
+import { connect } from "react-redux"
+import { confirmPeople } from "../redux/actions/confirmPeople"
 import ConfirmButtons from "../components/ConfirmButtons"
 import PersonInput from "../components/PersonInput"
 import styles from "../constants/Styles"
@@ -84,10 +86,10 @@ class AddPeople extends React.Component {
       <View style={[styles.column]}>
         <Text style={{ textAlign: "center", fontSize: 30}}>Who should pay?</Text>
         {this.renderPeopleInputs()}
-        <ConfirmButtons onConfirm={console.log} onCancel={console.log}/>
+        <ConfirmButtons onConfirm={() => this.props.confirmPeople(this.state.people)} onCancel={console.log}/>
       </View>
     )
 	}
 }
 
-export default AddPeople
+export default connect(null, { confirmPeople })(AddPeople)

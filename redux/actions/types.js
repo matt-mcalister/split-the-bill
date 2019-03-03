@@ -1,1 +1,2 @@
 export const SELECT_PHOTO = "SELECT_PHOTO"
+export const CONFIRM_PEOPLE = "CONFIRM_PEOPLE"
