@@ -1,2 +1,3 @@
 export const SELECT_PHOTO = "SELECT_PHOTO"
 export const CONFIRM_PEOPLE = "CONFIRM_PEOPLE"
+export const SET_LINE_AMOUNTS = "SET_LINE_AMOUNTS"

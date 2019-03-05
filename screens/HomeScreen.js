@@ -9,22 +9,23 @@ class HomeScreen extends React.Component {
 
 
   render() {
-    // console.log(this.props);
-    // if (!this.props.selectedPhoto) {
-    //   return (
-    //     <PhotoUpload />
-    //   );
-    // } else {
+    console.log(this.props);
+    if (!this.props.selectedPhoto) {
+      return (
+        <PhotoUpload />
+      );
+    } else {
       return (
         <AddPeople />
       )
-    // }
+    }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    selectedPhoto: state.selectPhoto.photo
+    selectedPhoto: state.selectPhoto.photo,
+    state: state
   }
 }
 

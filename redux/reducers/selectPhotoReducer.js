@@ -2,6 +2,7 @@ import * as types from "../actions/types"
 
 const defaultState = {
   photo: null,
+  lineAmounts: null
 }
 
 const selectPhotoReducer = (state = defaultState, action) => {
@@ -10,6 +11,12 @@ const selectPhotoReducer = (state = defaultState, action) => {
       return {
         ...state,
         photo: action.payload
+      }
+      break;
+    case types.SET_LINE_AMOUNTS:
+      return {
+        ...state,
+        lineAmounts: action.payload
       }
       break;
     default:
