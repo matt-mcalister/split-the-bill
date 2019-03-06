@@ -72,7 +72,6 @@ class PhotoUpload extends React.Component {
 
 	render(){
     if (this.state.uploadChoice) {
-      console.log(this.state.uploadChoice);
       return (
         <View style={[styles.column, styles.stretch]}>
           <Image

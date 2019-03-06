@@ -7,12 +7,11 @@ const PersonInput = ({ onChange, onSubmit, onRemove, person, isNewPerson }) => {
 		return (
 			<View style={{...styles.row, maxHeight:30}}>
 				<TextInput
-					style={{borderColor: 'gray', borderWidth: 1}}
 					placeholder="Tap to add another person"
 					onChangeText={onChange}
 					onSubmitEditing={onSubmit}
 					value={person.name}
-					style={{flex: 9}}
+					style={{flex: 9, borderColor: 'gray', borderWidth: 1}}
 				/>
 			</View>
 		)
@@ -20,10 +19,9 @@ const PersonInput = ({ onChange, onSubmit, onRemove, person, isNewPerson }) => {
 		return (
 			<View style={{...styles.row, maxHeight:30}}>
 				<TextInput
-					style={{borderColor: 'gray', borderWidth: 1}}
 					onChangeText={(name) => onChange(name, person.id)}
 					value={person.name}
-					style={{flex: 9}}
+					style={{flex: 9, borderColor: 'gray', borderWidth: 1}}
 				/>
 				<TouchableOpacity onPress={onRemove} style={{...styles.centered, flex: 1}}>
 					<Text style={{backgroundColor: "red", color: "white"}}>X</Text>

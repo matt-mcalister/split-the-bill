@@ -7,8 +7,6 @@ export const selectPhoto = (photoObj) => {
       type: types.SELECT_PHOTO,
       payload: photoObj
     })
-    console.log("yo");
-    console.log(scanPhoto.setLineAmounts({}));
     dispatch(scanPhoto.setLineAmounts({}))
   }
 }

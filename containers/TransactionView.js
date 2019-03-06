@@ -1,8 +1,11 @@
 import React from "react"
 import {
   View,
-  Text
+  Text,
+  TextInput
 } from "react-native"
+import { connect } from "react-redux"
+import styles from "../constants/Styles"
 
 
 class TransactionView extends React.Component {
@@ -10,18 +13,45 @@ class TransactionView extends React.Component {
     super(props)
 
     this.state = {
-      peopleIds: []
+      peopleIds: [],
+      price: `${props.lineAmount.data}`,
+      text: props.lineAmount.text
     }
   }
 
+  handleNumberInput = (text) => {
+    let price = parseFloat(text).toFixed(2)
+    this.setState({price})
+  }
+
   render(){
-    console.log(this.props);
+    console.log("PROPS: ", this.props);
+    console.log("STATE: ", this.state);
     return (
       <View>
-        <Text>
-          some shit
-        </Text>
+        <View>
+          <TextInput
+            onChangeText={this.handleNumberInput}
+            value={this.state.price}
+            keyboardType="decimal-pad"
+            style={{borderColor: 'gray', borderWidth: 1}}
+          />
+          <TextInput
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.text}
+            style={{borderColor: 'gray', borderWidth: 1}}
+          />
+        </View>
       </View>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    people: state.people,
+    receiptImage: state.selectPhoto.photo
+  }
+}
+
+export default connect(mapStateToProps)(TransactionView)

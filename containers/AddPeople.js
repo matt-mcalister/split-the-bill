@@ -81,7 +81,6 @@ class AddPeople extends React.Component {
   }
 
 	render(){
-    console.log(this.state);
 		return (
       <View style={[styles.column]}>
         <Text style={{ textAlign: "center", fontSize: 30}}>Who should pay?</Text>
