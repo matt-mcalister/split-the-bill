@@ -1,7 +1,9 @@
 import React from "react"
 import {
-  View
+  View,
+  Text
 } from "react-native"
+
 
 class TransactionView extends React.Component {
   constructor(props){
@@ -13,12 +15,12 @@ class TransactionView extends React.Component {
   }
 
   render(){
+    console.log(this.props);
     return (
       <View>
-        // edit price and description
-        // see shot of lineitem
-        // pick person
-        // confirm buttons
+        <Text>
+          some shit
+        </Text>
       </View>
     )
   }

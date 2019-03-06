@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 import PhotoUpload from "../containers/PhotoUpload"
 import AddPeople from "../containers/AddPeople"
 import TransactionView from "../containers/TransactionView"
+import Loading from "../components/Loading"
 
 class HomeScreen extends React.Component {
 
@@ -17,6 +18,8 @@ class HomeScreen extends React.Component {
       return <AddPeople />
     } else if (lineAmount) {
       return <TransactionView lineAmount={lineAmount} />
+    } else {
+      return <Loading />
     }
   }
 }
