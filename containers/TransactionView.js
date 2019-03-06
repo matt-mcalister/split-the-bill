@@ -6,6 +6,7 @@ import {
 } from "react-native"
 import { connect } from "react-redux"
 import styles from "../constants/Styles"
+import CroppedPhoto from "../components/CroppedPhoto"
 
 
 class TransactionView extends React.Component {
@@ -17,6 +18,7 @@ class TransactionView extends React.Component {
       price: `${props.lineAmount.data}`,
       text: props.lineAmount.text
     }
+    this.calulateCropPoints()
   }
 
   handleNumberInput = (text) => {
@@ -24,9 +26,26 @@ class TransactionView extends React.Component {
     this.setState({price})
   }
 
+  calulateCropPoints = () => {
+    let maxX = this.props.lineAmount.regions[0].x
+    let minX = this.props.lineAmount.regions[0].x
+    let maxY = this.props.lineAmount.regions[0].y
+    let minY = this.props.lineAmount.regions[0].y
+    this.props.lineAmount.regions.forEach(coords => {
+      coords.forEach(({ x, y }) => {
+        maxX = maxX > x ? maxX : x
+        minX = minX < x ? minX : x
+        maxY = maxY > y ? maxY : y
+        minY = minY < y ? minY : y
+      })
+    })
+    this.cropTop = minY
+    this.cropLeft = minX
+    this.cropWidth = maxX - minX
+    this.cropHeight = maxY - minY
+  }
+
   render(){
-    console.log("PROPS: ", this.props);
-    console.log("STATE: ", this.state);
     return (
       <View>
         <View>
@@ -42,6 +61,14 @@ class TransactionView extends React.Component {
             style={{borderColor: 'gray', borderWidth: 1}}
           />
         </View>
+        <CroppedPhoto
+          source={this.props.receiptImage}
+          cropTop={this.cropTop}
+          cropLeft={this.cropLeft}
+          cropWidth={this.cropWidth}
+          cropHeight={this.cropHeight}
+          originalWidth={this.props.receiptImage.width}
+          originalHeight={this.props.receiptImage.height} />
       </View>
     )
   }

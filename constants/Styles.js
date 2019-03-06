@@ -49,3 +49,7 @@ const styles = StyleSheet.create({
 });
 
 export default styles
+export {
+  screenWidth,
+  screenHeight
+}
