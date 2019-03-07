@@ -7,6 +7,7 @@ import {
 import { connect } from "react-redux"
 import styles from "../constants/Styles"
 import CroppedPhoto from "../components/CroppedPhoto"
+import PersonIcon from "../components/PersonIcon"
 
 
 class TransactionView extends React.Component {
@@ -46,6 +47,7 @@ class TransactionView extends React.Component {
   }
 
   render(){
+    let peopleIds = Object.keys(this.props.people)
     return (
       <View>
         <View>
@@ -69,6 +71,9 @@ class TransactionView extends React.Component {
           cropHeight={this.cropHeight}
           originalWidth={this.props.receiptImage.width}
           originalHeight={this.props.receiptImage.height} />
+        <View>
+          {peopleIds.map(id => <PersonIcon key={id} person={this.props.people[id]} handlePress={console.log}/>)}
+        </View>
       </View>
     )
   }
