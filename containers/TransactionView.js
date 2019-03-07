@@ -49,21 +49,22 @@ class TransactionView extends React.Component {
   render(){
     let peopleIds = Object.keys(this.props.people)
     return (
-      <View>
-        <View>
+      <View style={[styles.column]}>
+        <View style={{flex: 3, ...styles.centered}}>
+          <TextInput
+          onChangeText={(text) => this.setState({text})}
+          value={this.state.text}
+          style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.medium}}
+          />
           <TextInput
             onChangeText={this.handleNumberInput}
             value={this.state.price}
             keyboardType="decimal-pad"
-            style={{borderColor: 'gray', borderWidth: 1}}
-          />
-          <TextInput
-            onChangeText={(text) => this.setState({text})}
-            value={this.state.text}
-            style={{borderColor: 'gray', borderWidth: 1}}
+            style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.xlarge}}
           />
         </View>
         <CroppedPhoto
+          style={{flex: 1}}
           source={this.props.receiptImage}
           cropTop={this.cropTop}
           cropLeft={this.cropLeft}
@@ -71,7 +72,7 @@ class TransactionView extends React.Component {
           cropHeight={this.cropHeight}
           originalWidth={this.props.receiptImage.width}
           originalHeight={this.props.receiptImage.height} />
-        <View>
+        <View style={{flex: 3}}>
           {peopleIds.map(id => <PersonIcon key={id} person={this.props.people[id]} handlePress={console.log}/>)}
         </View>
       </View>

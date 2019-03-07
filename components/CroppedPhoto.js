@@ -8,6 +8,7 @@ const CroppedPhoto = props => {
     <View style={[{
       overflow: 'hidden',
       height: props.cropHeight * resizeRatio,
+      maxHeight: props.cropHeight * resizeRatio,
       width: props.cropWidth * resizeRatio,
       maxWidth: screenWidth,
       backgroundColor: 'transparent'
