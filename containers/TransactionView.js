@@ -62,7 +62,7 @@ class TransactionView extends React.Component {
   render(){
     let peopleIds = Object.keys(this.props.people)
     return (
-      <View style={[styles.column]}>
+      <View style={[styles.column, styles.fullScreen]}>
         <View style={{flex: 3, ...styles.centered}}>
           <TextInput
           onChangeText={(text) => this.setState({text})}

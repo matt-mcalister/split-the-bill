@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { connect } from "react-redux"
 
 import PhotoUpload from "../containers/PhotoUpload"
@@ -17,7 +17,22 @@ class HomeScreen extends React.Component {
     } else if (!this.props.peopleSelected) {
       return <AddPeople />
     } else if (lineAmount) {
-      return <TransactionView lineAmount={lineAmount} />
+      return (
+        <ScrollView
+          horizontal={true}
+          pagingEnabled={true}
+          onScroll={console.log}
+        >
+          {this.props.lineAmounts.map(la => {
+            return (
+              <TransactionView key={la.text} lineAmount={la} />
+            )
+          })}
+        </ScrollView>
+
+
+
+      )
     } else {
       return <Loading />
     }
