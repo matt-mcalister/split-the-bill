@@ -4,12 +4,14 @@ import {
   Text
 } from "react-native"
 
-const PersonIcon = ({ handlePress, person }) => {
+const PersonIcon = ({ handlePress, person, selected }) => {
+  let style = selected ? {backgroundColor: "green"} : {backgroundColor: "red"}
   return (
     <TouchableOpacity
       onPress={handlePress}
+      style={style}
     >
-      <Text>
+      <Text style={{color: "white"}}>
         {person.name}
       </Text>
     </TouchableOpacity>

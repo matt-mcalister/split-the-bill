@@ -46,6 +46,19 @@ class TransactionView extends React.Component {
     this.cropHeight = maxY - minY
   }
 
+  addPerson = (id) => {
+    this.setState({
+      peopleIds: [...this.state.peopleIds, id]
+    })
+  }
+
+  removePerson = (id) => {
+    let peopleIds = this.state.peopleIds.filter(pid => pid !== id)
+    this.setState({
+      peopleIds
+    })
+  }
+
   render(){
     let peopleIds = Object.keys(this.props.people)
     return (
@@ -73,7 +86,17 @@ class TransactionView extends React.Component {
           originalWidth={this.props.receiptImage.width}
           originalHeight={this.props.receiptImage.height} />
         <View style={{flex: 3}}>
-          {peopleIds.map(id => <PersonIcon key={id} person={this.props.people[id]} handlePress={console.log}/>)}
+          {peopleIds.map(id => {
+            let selected = this.state.peopleIds.includes(id)
+            return (
+              <PersonIcon
+                key={id}
+                person={this.props.people[id]}
+                selected={selected}
+                handlePress={selected ? () => this.removePerson(id) : () => this.addPerson(id)}
+              />
+            )
+          })}
         </View>
       </View>
     )
