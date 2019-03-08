@@ -11,28 +11,12 @@ class HomeScreen extends React.Component {
 
 
   render() {
-    let lineAmount = this.props.lineAmounts && this.props.lineAmounts.find(el => !el.peopleIds)
     if (!this.props.photoSelected) {
       return <PhotoUpload />
     } else if (!this.props.peopleSelected) {
       return <AddPeople />
-    } else if (lineAmount) {
-      return (
-        <ScrollView
-          horizontal={true}
-          pagingEnabled={true}
-          onScroll={console.log}
-        >
-          {this.props.lineAmounts.map(la => {
-            return (
-              <TransactionView key={la.text} lineAmount={la} />
-            )
-          })}
-        </ScrollView>
-
-
-
-      )
+    } else if (this.props.lineAmounts) {
+      return <TransactionView />
     } else {
       return <Loading />
     }
