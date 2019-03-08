@@ -2,9 +2,9 @@ import React from "react"
 import { View, TouchableOpacity, Text } from "react-native"
 import styles from "../constants/Styles"
 
-const ConfirmButtons = ({ onConfirm, onCancel }) => {
+const ConfirmButtons = ({ onConfirm, onCancel, style }) => {
   return (
-    <View style={[styles.row, styles.confirmButtonsContainer]}>
+    <View style={[styles.row, styles.confirmButtonsContainer, style]}>
       <TouchableOpacity
         style={[styles.confirmButtons, styles.cancelButton]}
         onPress={onCancel}>

@@ -2,9 +2,10 @@ import React from "react"
 import {
   ScrollView
 } from "react-native"
-import styles from "../constants/Styles"
+import styles, { screenWidth, screenHeight } from "../constants/Styles"
 import { connect } from "react-redux"
 import TransactionItem from "../components/TransactionItem"
+import ConfirmButtons from "../components/ConfirmButtons"
 
 
 class TransactionView extends React.Component {
@@ -44,22 +45,25 @@ class TransactionView extends React.Component {
   }
   render(){
     return (
-      <ScrollView
-        horizontal={true}
-        pagingEnabled={true}
-      >
-        {this.props.lineAmounts.map(la => {
-          return (
-            <TransactionItem
-              key={la.text}
-              lineAmount={la}
-              addPerson={this.addPerson(la.index)}
-              removePerson={this.removePerson(la.index)}
-              peopleIds={this.state.transactions[la.index].peopleIds}
-            />
-          )
-        })}
-      </ScrollView>
+      <React.Fragment>
+        <ScrollView
+          horizontal={true}
+          pagingEnabled={true}
+        >
+          {this.props.lineAmounts.map(la => {
+            return (
+              <TransactionItem
+                key={la.text}
+                lineAmount={la}
+                addPerson={this.addPerson(la.index)}
+                removePerson={this.removePerson(la.index)}
+                peopleIds={this.state.transactions[la.index].peopleIds}
+              />
+            )
+          })}
+        </ScrollView>
+        <ConfirmButtons style={{position: "absolute", bottom: 0, width: screenWidth, height: screenHeight / 10}}/>
+      </React.Fragment>
     )
   }
 }
