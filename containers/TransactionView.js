@@ -12,12 +12,12 @@ class TransactionView extends React.Component {
   constructor(props){
     super(props)
 
-    let transactions = {}
-    this.props.lineAmounts.forEach(la => {
-      transactions[la.index] = {index: la.index, peopleIds: []}
-    })
+    // let transactions = {}
+    // this.props.lineAmounts.forEach(la => {
+    //   transactions[la.index] = {index: la.index, peopleIds: []}
+    // })
     this.state = {
-      transactions: transactions
+      transactions: {...this.props.lineAmounts}
     }
   }
 
@@ -43,6 +43,12 @@ class TransactionView extends React.Component {
       })
     }
   }
+
+  confirmTransactions = () => {
+    console.log(this.state)
+  }
+
+
   render(){
     return (
       <React.Fragment>
@@ -50,19 +56,19 @@ class TransactionView extends React.Component {
           horizontal={true}
           pagingEnabled={true}
         >
-          {this.props.lineAmounts.map(la => {
+          {Object.keys(this.props.lineAmounts).map(index => {
             return (
               <TransactionItem
-                key={la.text}
-                lineAmount={la}
-                addPerson={this.addPerson(la.index)}
-                removePerson={this.removePerson(la.index)}
-                peopleIds={this.state.transactions[la.index].peopleIds}
+                key={this.props.lineAmounts[index].text}
+                lineAmount={this.props.lineAmounts[index]}
+                addPerson={this.addPerson(index)}
+                removePerson={this.removePerson(index)}
+                peopleIds={this.state.transactions[index].peopleIds}
               />
             )
           })}
         </ScrollView>
-        <ConfirmButtons style={{position: "absolute", bottom: 0, width: screenWidth, height: screenHeight / 10}}/>
+        <ConfirmButtons onConfirm={this.confirmTransactions} style={{position: "absolute", bottom: 0, width: screenWidth, height: screenHeight / 10}}/>
       </React.Fragment>
     )
   }
