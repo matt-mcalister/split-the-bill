@@ -26,7 +26,7 @@ const selectPhotoReducer = (state = defaultState, action) => {
     case types.CONFIRM_TRANSACTIONS:
       return {
         ...state,
-        lineAmounts: action.payload
+        lineAmounts: {...action.payload}
       }
     default:
       return state
