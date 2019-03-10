@@ -25,7 +25,7 @@ class PhotoUpload extends React.Component {
   handleGetPhotos = () => {
     const options = {
       mediaTypes: "Images",
-      quality: 1,
+      quality: 0.5,
       base64: true,
       exif: true,
     }
@@ -44,7 +44,7 @@ class PhotoUpload extends React.Component {
   handleTakePhoto = () => {
     const options = {
       allowsEditing: false,
-      quality: 1,
+      quality: 0.5,
       base64: true,
       exif: true,
     }
