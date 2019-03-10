@@ -59,7 +59,7 @@ class TransactionView extends React.Component {
           {Object.keys(this.props.lineAmounts).map(index => {
             return (
               <TransactionItem
-                key={this.props.lineAmounts[index].text}
+                key={index}
                 lineAmount={this.props.lineAmounts[index]}
                 addPerson={this.addPerson(index)}
                 removePerson={this.removePerson(index)}

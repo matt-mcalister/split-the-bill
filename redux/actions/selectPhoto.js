@@ -7,6 +7,9 @@ export const selectPhoto = (photoObj) => {
       type: types.SELECT_PHOTO,
       payload: photoObj
     })
-    dispatch(scanPhoto.setLineAmounts({}))
+    scanPhoto.fetchScanInfo(photoObj.base64)
+      .then(photoScan => {
+        dispatch(scanPhoto.setLineAmounts(photoScan))
+      })
   }
 }
