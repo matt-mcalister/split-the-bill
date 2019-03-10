@@ -14,10 +14,10 @@ const selectPhotoReducer = (state = defaultState, action) => {
       }
       break;
     case types.SET_LINE_AMOUNTS:
-    let formattedLineAmounts = {}
-    action.payload.forEach(la => {
-      formattedLineAmounts[la.index] = {...la, peopleIds: []}
-    })
+      let formattedLineAmounts = {}
+      action.payload.forEach(la => {
+        formattedLineAmounts[la.index] = {...la, peopleIds: []}
+      })
       return {
         ...state,
         lineAmounts: formattedLineAmounts

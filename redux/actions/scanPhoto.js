@@ -4,17 +4,10 @@ import { data } from "../../constants/testData"
 
 export const setLineAmounts = (fetchedData) => {
   console.log(fetchedData);
-  let lineAmounts = fetchedData.lineAmounts.length > 0 ? fetchedData.lineAmounts : fetchedData.amounts
 
-  lineAmounts = lineAmounts.map(transaction => {
-    return {
-      ...transaction,
-      peopleIds: null
-    }
-  })
   return {
     type: types.SET_LINE_AMOUNTS,
-    payload: lineAmounts
+    payload: fetchedData.amounts
   }
 }
 
