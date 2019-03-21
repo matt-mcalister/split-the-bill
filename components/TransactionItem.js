@@ -11,13 +11,8 @@ import PersonIcon from "../components/PersonIcon"
 
 
 class TransactionItem extends React.Component {
-  constructor(props){
-    super(props)
 
-    this.state = {
-      price: `${props.lineAmount.data}`,
-      text: props.lineAmount.text
-    }
+  componentWillMount(){
     this.calulateCropPoints()
   }
 
