@@ -46,7 +46,6 @@ class TransactionView extends React.Component {
 
   handleChangeText = (id) => {
     return (text) => {
-      console.log(text, id);
       this.setState({
         transactions: {
           ...this.state.transactions,
@@ -60,7 +59,6 @@ class TransactionView extends React.Component {
 
 
   render(){
-    console.log("RENDER STATE: ", this.state);
     return (
       <React.Fragment>
         <ScrollView
