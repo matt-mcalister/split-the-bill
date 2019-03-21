@@ -5,7 +5,7 @@ import {
 import styles, { screenWidth, screenHeight } from "../constants/Styles"
 import { connect } from "react-redux"
 import TransactionItem from "../components/TransactionItem"
-import ConfirmButtons from "../components/ConfirmButtons"
+import Totals from "../components/Totals"
 
 
 class TransactionView extends React.Component {
@@ -67,8 +67,8 @@ class TransactionView extends React.Component {
               />
             )
           })}
+          <Totals />
         </ScrollView>
-        <ConfirmButtons onConfirm={this.confirmTransactions} style={{position: "absolute", bottom: 0, width: screenWidth, height: screenHeight / 10}}/>
       </React.Fragment>
     )
   }
