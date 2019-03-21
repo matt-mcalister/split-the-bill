@@ -21,10 +21,6 @@ class TransactionItem extends React.Component {
     this.calulateCropPoints()
   }
 
-  handleNumberInput = (text) => {
-    let price = parseFloat(text).toFixed(2)
-    this.setState({price})
-  }
 
   calulateCropPoints = () => {
     let maxX = this.props.lineAmount.regions[0].x
@@ -56,9 +52,9 @@ class TransactionItem extends React.Component {
           style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.medium}}
           />
           <TextInput
-            onChangeText={this.handleNumberInput}
-            value={this.state.price}
-            keyboardType="decimal-pad"
+            onChangeText={this.props.handleChangePrice}
+            value={`${this.props.lineAmount.data}`}
+            keyboardType="numeric"
             style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.xlarge}}
           />
         </View>

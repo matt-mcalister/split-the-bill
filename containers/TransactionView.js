@@ -57,6 +57,25 @@ class TransactionView extends React.Component {
     }
   }
 
+  validPrice = (newPrice) => {
+    return !newPrice.match(/\..*?(\d{3,})|\..*?(\.)/)
+  }
+
+  handleChangePrice = (id) => {
+    return (price) => {
+      if (this.validPrice(price)) {
+        this.setState({
+          transactions: {
+            ...this.state.transactions,
+            [id]: {
+              ...this.state.transactions[id],
+              data: price
+            }}
+          })
+      }
+    }
+  }
+
 
   render(){
     return (
@@ -71,6 +90,7 @@ class TransactionView extends React.Component {
                 key={index}
                 lineAmount={this.state.transactions[index]}
                 handleChangeText={this.handleChangeText(index)}
+                handleChangePrice={this.handleChangePrice(index)}
                 addPerson={this.addPerson(index)}
                 removePerson={this.removePerson(index)}
                 peopleIds={this.state.transactions[index].peopleIds}
