@@ -16,12 +16,24 @@ const Totals = (props) => {
       people[id].total += props.lineAmounts[lineId].data / props.lineAmounts[lineId].peopleIds.length
     })
   })
-  console.log(people);
+
   return (
     <View style={[styles.column, styles.fullScreen]}>
-      <Text>
-        totals
-      </Text>
+      {
+        Object.keys(people).map(id => {
+          let person = people[id]
+          return (
+            <View key={id}>
+              <Text>
+                {person.name}
+              </Text>
+              <Text>
+                ${person.total}
+              </Text>
+            </View>
+          )
+        })
+      }
       <ConfirmButtons style={{position: "absolute", bottom: 0, width: screenWidth, height: screenHeight / 10}}/>
     </View>
   )
