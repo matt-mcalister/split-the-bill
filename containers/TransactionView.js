@@ -44,10 +44,6 @@ class TransactionView extends React.Component {
     }
   }
 
-  confirmTransactions = () => {
-    console.log(this.state)
-  }
-
 
   render(){
     return (
@@ -67,7 +63,7 @@ class TransactionView extends React.Component {
               />
             )
           })}
-          <Totals />
+          <Totals lineAmounts={this.state.transactions}/>
         </ScrollView>
       </React.Fragment>
     )
