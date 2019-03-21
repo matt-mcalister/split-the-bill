@@ -44,19 +44,35 @@ class TransactionView extends React.Component {
     }
   }
 
+  handleChangeText = (id) => {
+    return (text) => {
+      console.log(text, id);
+      this.setState({
+        transactions: {
+          ...this.state.transactions,
+          [id]: {
+            ...this.state.transactions[id],
+            text: text
+          }}
+      })
+    }
+  }
+
 
   render(){
+    console.log("RENDER STATE: ", this.state);
     return (
       <React.Fragment>
         <ScrollView
           horizontal={true}
           pagingEnabled={true}
         >
-          {Object.keys(this.props.lineAmounts).map(index => {
+          {Object.keys(this.state.transactions).map(index => {
             return (
               <TransactionItem
                 key={index}
-                lineAmount={this.props.lineAmounts[index]}
+                lineAmount={this.state.transactions[index]}
+                handleChangeText={this.handleChangeText(index)}
                 addPerson={this.addPerson(index)}
                 removePerson={this.removePerson(index)}
                 peopleIds={this.state.transactions[index].peopleIds}

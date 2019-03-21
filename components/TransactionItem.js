@@ -51,8 +51,8 @@ class TransactionItem extends React.Component {
       <View style={[styles.column, styles.fullScreen]}>
         <View style={{flex: 3, ...styles.centered}}>
           <TextInput
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
+          onChangeText={this.props.handleChangeText}
+          value={this.props.lineAmount.text}
           style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.medium}}
           />
           <TextInput
