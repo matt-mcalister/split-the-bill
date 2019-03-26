@@ -3,9 +3,11 @@ import * as scanPhoto from "./scanPhoto"
 
 export const selectPhoto = (photoObj) => {
   return dispatch => {
+    let photo = {...photoObj}
+    delete photo.base64
     dispatch({
       type: types.SELECT_PHOTO,
-      payload: photoObj
+      payload: photo
     })
     scanPhoto.fetchScanInfo(photoObj.base64)
       .then(photoScan => {

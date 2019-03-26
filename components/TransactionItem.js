@@ -53,7 +53,7 @@ class TransactionItem extends React.Component {
             style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.xlarge}}
           />
         </View>
-        <CroppedPhoto
+        {this.props.isFocused && <CroppedPhoto
           style={{flex: 1}}
           source={this.props.receiptImage}
           cropTop={this.cropTop}
@@ -61,7 +61,7 @@ class TransactionItem extends React.Component {
           cropWidth={this.cropWidth}
           cropHeight={this.cropHeight}
           originalWidth={this.props.receiptImage.width}
-          originalHeight={this.props.receiptImage.height} />
+          originalHeight={this.props.receiptImage.height} />}
         <View style={{flex: 3}}>
           {peopleIds.map(id => {
             let selected = this.props.peopleIds.includes(id)

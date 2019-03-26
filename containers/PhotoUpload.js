@@ -25,9 +25,8 @@ class PhotoUpload extends React.Component {
   handleGetPhotos = () => {
     const options = {
       mediaTypes: "Images",
-      quality: 0.5,
+      quality: 0.7,
       base64: true,
-      exif: true,
     }
     Permissions.askAsync(Permissions.CAMERA_ROLL).then( ({permissions}) => {
       if (permissions.cameraRoll && permissions.cameraRoll.status === "granted"){
@@ -44,9 +43,8 @@ class PhotoUpload extends React.Component {
   handleTakePhoto = () => {
     const options = {
       allowsEditing: false,
-      quality: 0.5,
+      quality: 0.7,
       base64: true,
-      exif: true,
     }
     Permissions.askAsync(Permissions.CAMERA).then( ({permissions}) => {
       if (permissions.camera && permissions.camera.status === "granted"){

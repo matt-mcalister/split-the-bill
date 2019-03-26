@@ -2,6 +2,8 @@ import React from "react"
 import {
   ScrollView
 } from "react-native"
+import AddPaging from 'react-native-paged-scroll-view/index';
+var PagedScrollView = AddPaging(ScrollView);
 import styles, { screenWidth, screenHeight } from "../constants/Styles"
 import { connect } from "react-redux"
 import TransactionItem from "../components/TransactionItem"
@@ -12,12 +14,9 @@ class TransactionView extends React.Component {
   constructor(props){
     super(props)
 
-    // let transactions = {}
-    // this.props.lineAmounts.forEach(la => {
-    //   transactions[la.index] = {index: la.index, peopleIds: []}
-    // })
     this.state = {
-      transactions: {...this.props.lineAmounts}
+      transactions: {...this.props.lineAmounts},
+      currentPage: 1,
     }
   }
 
@@ -76,18 +75,29 @@ class TransactionView extends React.Component {
     }
   }
 
+  handlePageChange = (state) => {
+    console.log("whole state: ", state);
+    console.log('current horizontal page:', state.currentHorizontalPage)
+    this.setState({
+      currentPage: state.currentHorizontalPage
+    })
+  }
+
 
   render(){
+    let currentPage = this.state.currentPage - 1
     return (
       <React.Fragment>
-        <ScrollView
+        <PagedScrollView
+          onPageChange={this.handlePageChange}
           horizontal={true}
           pagingEnabled={true}
         >
-          {Object.keys(this.state.transactions).map(index => {
+          {Object.keys(this.state.transactions).map((index, i) => {
             return (
               <TransactionItem
                 key={index}
+                isFocused={i >= currentPage - 2 && i <= currentPage + 2}
                 lineAmount={this.state.transactions[index]}
                 handleChangeText={this.handleChangeText(index)}
                 handleChangePrice={this.handleChangePrice(index)}
@@ -98,7 +108,7 @@ class TransactionView extends React.Component {
             )
           })}
           <Totals lineAmounts={this.state.transactions}/>
-        </ScrollView>
+        </PagedScrollView>
       </React.Fragment>
     )
   }
