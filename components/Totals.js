@@ -2,7 +2,8 @@ import React from "react"
 import {
   View,
   Text,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from "react-native"
 import { connect } from "react-redux"
 import styles, { screenWidth, screenHeight } from "../constants/Styles"
@@ -13,6 +14,12 @@ class Totals extends React.Component {
 
   state = {
     tip: "20"
+  }
+
+  onRemove = () => {
+    this.setState({
+      tip: 0
+    })
   }
 
   render() {
@@ -44,7 +51,7 @@ class Totals extends React.Component {
             })
           }
           </View>
-        <View style={{flex: 3}}>
+        {this.state.tip !== 0 && (<View style={{flex: 3, flexDirection: "row", alignItems: "center", justifyContent: "flex-start"}}>
           <Text>
             Tip Percentage:
           </Text>
@@ -52,11 +59,13 @@ class Totals extends React.Component {
           onChangeText={(tip) => this.setState({tip})}
           value={this.state.tip}
           keyboardType="numeric"
-          style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.small}}
+          style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.small, minWidth: screenWidth / 2, maxHeight: styles.small.fontSize}}
           >
           </TextInput>
-        </View>
-        <ConfirmButtons style={{position: "absolute", bottom: 0, width: screenWidth, height: screenHeight / 10}}/>
+          <TouchableOpacity onPress={this.onRemove} style={{...styles.centered, marginLeft: 2, marginRight: 2}}>
+  					<Text style={{backgroundColor: "red", color: "white"}}>X</Text>
+  				</TouchableOpacity>
+        </View>)}
         </View>
       )
 
