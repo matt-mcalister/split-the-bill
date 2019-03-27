@@ -2,10 +2,11 @@ import React from "react"
 import {
   View,
   Text,
-  TextInput
+  TextInput,
+  ScrollView
 } from "react-native"
 import { connect } from "react-redux"
-import styles from "../constants/Styles"
+import styles, { screenHeight, screenWidth } from "../constants/Styles"
 import CroppedPhoto from "../components/CroppedPhoto"
 import PersonIcon from "../components/PersonIcon"
 
@@ -62,7 +63,7 @@ class TransactionItem extends React.Component {
           cropHeight={this.cropHeight}
           originalWidth={this.props.receiptImage.width}
           originalHeight={this.props.receiptImage.height} />}
-        <View style={{flex: 3}}>
+        <View style={{flex: 4, flexDirection: "row", flexWrap: "wrap", width: screenWidth, height: (screenWidth * 4 / 3)}}>
           {peopleIds.map(id => {
             let selected = this.props.peopleIds.includes(id)
             return (
