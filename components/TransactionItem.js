@@ -45,13 +45,13 @@ class TransactionItem extends React.Component {
           <TextInput
           onChangeText={this.props.handleChangeText}
           value={this.props.lineAmount.text}
-          style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.medium}}
+          style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", width: screenWidth, ...styles.medium}}
           />
           <TextInput
             onChangeText={this.props.handleChangePrice}
             value={`${this.props.lineAmount.data}`}
             keyboardType="numeric"
-            style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", ...styles.xlarge}}
+            style={{borderColor: 'gray', borderWidth: 1, textAlign: "center", width: screenWidth, ...styles.xlarge}}
           />
         </View>
         {this.props.isFocused && <CroppedPhoto
