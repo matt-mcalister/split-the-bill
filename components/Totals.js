@@ -32,8 +32,6 @@ class Totals extends React.Component {
         })
       })
       let width = (screenWidth / 4) - 5
-      console.log("Width: ", screenWidth);
-      console.log("Height: ", screenHeight);
       return (
         <View style={[styles.column, styles.fullScreen]}>
           <View style={{flex: 2, flexDirection: "row", flexWrap: "wrap", width: screenWidth}}>

@@ -76,8 +76,6 @@ class TransactionView extends React.Component {
   }
 
   handlePageChange = (state) => {
-    console.log("whole state: ", state);
-    console.log('current horizontal page:', state.currentHorizontalPage)
     this.setState({
       currentPage: state.currentHorizontalPage
     })

@@ -3,7 +3,6 @@ import * as types from "./types"
 import { data } from "../../constants/testData"
 
 export const setLineAmounts = (fetchedData) => {
-  console.log(fetchedData);
 
   return {
     type: types.SET_LINE_AMOUNTS,
@@ -12,7 +11,6 @@ export const setLineAmounts = (fetchedData) => {
 }
 
 export const fetchScanInfo = (image) => {
-  console.log(API_KEY);
   return fetch("https://api.taggun.io/api/receipt/v1/verbose/encoded", {
     method: "POST",
     headers: {
