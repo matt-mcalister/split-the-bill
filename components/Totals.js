@@ -13,17 +13,24 @@ import ConfirmButtons from "./ConfirmButtons"
 class Totals extends React.Component {
 
   state = {
-    tip: "20"
+    tip: "20",
+    hidden: true
   }
 
   onRemove = () => {
     this.setState({
-      tip: 0
+      hidden: true
+    })
+  }
+
+  onShow = () => {
+    this.setState({
+      hidden: false
     })
   }
 
   render() {
-      let multiplier = (this.state.tip / 100) + 1
+      let multiplier = this.state.hidden ? 1 : (this.state.tip / 100) + 1
       const people = {...this.props.people}
       Object.keys(people).forEach(pid => people[pid].total = 0)
       Object.keys(this.props.lineAmounts).forEach(lineId => {
@@ -52,7 +59,7 @@ class Totals extends React.Component {
           }
           </View>
           <View style={{flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "flex-start"}}>
-            {this.state.tip !== 0 ? (
+            {!this.state.hidden ? (
             <React.Fragment>
               <Text>
                 Tip Percentage:
@@ -69,9 +76,11 @@ class Totals extends React.Component {
       				</TouchableOpacity>
             </React.Fragment>
           ) :
-            <Text>
-              Add tip
-            </Text>
+            (<TouchableOpacity onPress={this.onShow}>
+              <Text style={{backgroundColor: "green", color: "white"}}>
+                Add tip
+              </Text>
+            </TouchableOpacity>)
           }
           </View>
           <View style={{flex: 1}}>
