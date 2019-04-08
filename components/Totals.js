@@ -32,14 +32,16 @@ class Totals extends React.Component {
         })
       })
       let width = (screenWidth / 4) - 5
+      console.log("Width: ", screenWidth);
+      console.log("Height: ", screenHeight);
       return (
         <View style={[styles.column, styles.fullScreen]}>
-          <View style={{flex: 3, flexDirection: "row", flexWrap: "wrap", width: screenWidth}}>
+          <View style={{flex: 2, flexDirection: "row", flexWrap: "wrap", width: screenWidth}}>
           {
             Object.keys(people).map(id => {
               let person = people[id]
               return (
-                <View key={id} style={{width: width, borderRadius: width, margin: 2, height: width, alignItems: "center", justifyContent: "center"}}>
+                <View key={id} style={{width: width, borderRadius: width, margin: 2, height: width, alignItems: "center", justifyContent: "center", backgroundColor: "blue"}}>
                   <Text style={[styles.small]}>
                   {person.name}
                   </Text>
@@ -52,7 +54,7 @@ class Totals extends React.Component {
           }
           </View>
           <View style={{flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "flex-start"}}>
-            {this.state.tip !== 0 && (
+            {this.state.tip !== 0 ? (
             <React.Fragment>
               <Text>
                 Tip Percentage:
@@ -68,11 +70,17 @@ class Totals extends React.Component {
       					<Text style={{backgroundColor: "red", color: "white"}}>X</Text>
       				</TouchableOpacity>
             </React.Fragment>
-          )}
+          ) :
+            <Text>
+              Add tip
+            </Text>
+          }
           </View>
-          <TouchableOpacity onPress={console.log} style={{width: screenWidth * .9, backgroundColor: "green", flex: 1, ...styles.centered}}>
-            <Text style={{color: "white", ...styles.small, textAlign: "center"}}>Scan Another Receipt</Text>
-          </TouchableOpacity>
+          <View style={{flex: 1}}>
+            <TouchableOpacity onPress={console.log} style={{width: screenWidth * .9, backgroundColor: "green", ...styles.centered}}>
+              <Text style={{color: "white", ...styles.small, textAlign: "center"}}>Scan Another Receipt</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )
 

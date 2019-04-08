@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions, Platform, PixelRatio } from "react-native"
 
 
 const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
+const screenHeight = Dimensions.get('window').height * 0.9
 
 // based on iphone 5s's scale
 const scale = screenWidth / 320;
