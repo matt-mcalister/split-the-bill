@@ -6,6 +6,7 @@ import {
 } from "react-native"
 import { connect } from "react-redux"
 import { confirmPeople } from "../redux/actions/confirmPeople"
+import { fullReset } from "../redux/actions/fullReset"
 import ConfirmButtons from "../components/ConfirmButtons"
 import PersonInput from "../components/PersonInput"
 import styles from "../constants/Styles"
@@ -85,10 +86,10 @@ class AddPeople extends React.Component {
       <View style={[styles.column]}>
         <Text style={{ textAlign: "center", fontSize: 30}}>Who should pay?</Text>
         {this.renderPeopleInputs()}
-        <ConfirmButtons onConfirm={() => this.props.confirmPeople(this.state.people)} onCancel={console.log}/>
+        <ConfirmButtons onConfirm={() => this.props.confirmPeople(this.state.people)} onCancel={this.props.fullReset}/>
       </View>
     )
 	}
 }
 
-export default connect(null, { confirmPeople })(AddPeople)
+export default connect(null, { confirmPeople, fullReset })(AddPeople)
