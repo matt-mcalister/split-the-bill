@@ -28,6 +28,9 @@ const selectPhotoReducer = (state = defaultState, action) => {
         ...state,
         lineAmounts: {...action.payload}
       }
+    case types.FULL_RESET:
+      return defaultState
+      break;
     default:
       return state
   }

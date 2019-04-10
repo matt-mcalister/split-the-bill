@@ -9,6 +9,9 @@ const peopleReducer = (state = defaultState, action) => {
         ...action.payload
       }
       break;
+    case types.FULL_RESET:
+      return defaultState
+      break;
     default:
       return state
   }

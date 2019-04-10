@@ -6,6 +6,7 @@ import {
   TouchableOpacity
 } from "react-native"
 import { connect } from "react-redux"
+import { fullReset } from "../redux/actions/fullReset"
 import styles, { screenWidth, screenHeight } from "../constants/Styles"
 import ConfirmButtons from "./ConfirmButtons"
 
@@ -84,7 +85,7 @@ class Totals extends React.Component {
           }
           </View>
           <View style={{flex: 1}}>
-            <TouchableOpacity onPress={console.log} style={{width: screenWidth * .9, backgroundColor: "green", ...styles.centered}}>
+            <TouchableOpacity onPress={this.props.fullReset} style={{width: screenWidth * .9, backgroundColor: "green", ...styles.centered}}>
               <Text style={{color: "white", ...styles.small, textAlign: "center"}}>Scan Another Receipt</Text>
             </TouchableOpacity>
           </View>
@@ -101,4 +102,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Totals)
+export default connect(mapStateToProps, { fullReset })(Totals)
